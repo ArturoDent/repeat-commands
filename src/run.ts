@@ -31,8 +31,8 @@ export async function buildCommands(args: ArgsObject): Promise<string> {
   let commands = args.commands;
   let postCommands = args.postCommands;
   
-  const repeat = args.repeat || 0;
-  let sequence, preCommandSequence, postCommandSequence;
+  const repeat = Math.abs(Math.floor(args.repeat));
+  let sequence;
   
   const allCommands = await utilities.getAllCommands();
   
@@ -52,26 +52,6 @@ export async function buildCommands(args: ArgsObject): Promise<string> {
     index++;
   }
   
-  // argCommands.map(async set => {
-  //   if (set && (typeof set === 'string')) set = [set];
-  //   if (set) preCommandSequence = await _flatMapCommands(set, allCommands);  
-    
-  // })
-  
-  // if (preCommands && !Array.isArray(preCommands)) preCommands = [preCommands]; 
-  // if (preCommands && (typeof preCommands === 'string')) preCommands = [preCommands];  
-  // if (commands && !Array.isArray(commands)) commands = [commands];  
-  // if (postCommands && !Array.isArray(postCommands)) postCommands = [postCommands];  
-
-  // if (preCommands) preCommandSequence = await _flatMapCommands(preCommands, allCommands);  
-  // if (commands) sequence = await _flatMapCommands(commands, allCommands);  
-  // if (postCommands) postCommandSequence = await _flatMapCommands(postCommands, allCommands);  
-
-  // if (preCommandSequence) preCommandSequence = preCommandSequence.join('');  
-  // if (sequence) sequence = sequence.join('');
-  // if (postCommandSequence) postCommandSequence = postCommandSequence.join('');
-  
-  // if (sequence && repeat) sequence = sequence.repeat(repeat);
   if (repeat)
     sequences[CommandSequence.Commands] = sequences[CommandSequence.Commands].repeat(repeat);
   
@@ -95,20 +75,24 @@ async function _flatMapCommands(commands: string[], allCommands: string[]): Prom
   
   return commands.flatMap((command: string | CommandObject) => {
     
-    if (typeof command !== 'string') {
+    // if (typeof command !== 'string') {
       
-      if (command.args) {
+      // if (command.args) {
         
-        // return `await vscode.commands.executeCommand('${command.command}', \{ ${command.args} \});\n`;
-        return `await vscode.commands.executeCommand('workbench.action.terminal.sendSequence', {text:'howdy'});\n`;
-        // return `await vscode.commands.executeCommand('${command.command}', {text:'echo ${fileDirname}\u000d'});\n`;
-      }
-      console.log("here"); 
+      //   // return `await vscode.commands.executeCommand('${command.command}', \{ ${command.args} \});\n`;
+      //   return `await vscode.commands.executeCommand('workbench.action.terminal.sendSequence', {text:'howdy'});\n`;
+      //   // return `await vscode.commands.executeCommand('${command.command}', {text:'echo ${fileDirname}\u000d'});\n`;
+      // }
+    // }
+    
+    if (typeof command === 'string') {
+      
+      if (allCommands.includes(command))
+        return `await vscode.commands.executeCommand('${command}');\n`;
+      
+      else if (command.startsWith('vscode.'))
+        return `await ${command};\n`;
     }
-    else if (allCommands.includes(command))
-      return `await vscode.commands.executeCommand('${command}');\n`;
-    else if (command.startsWith('vscode.'))
-      return `await ${command};\n`;
   });
 }
 

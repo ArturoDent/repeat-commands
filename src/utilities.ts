@@ -24,5 +24,5 @@ export async function getRepeatInput (): Promise<number> {
   };
   const repeatNum = await vscode.window.showInputBox(options);
 
-  return Math.floor(Number(repeatNum)) || 0;
+  return Math.abs(Math.floor(Number(repeatNum))) || 0;
 };
