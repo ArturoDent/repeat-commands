@@ -2,7 +2,7 @@
 	"name": "repeat-commands",
 	"displayName": "Repeat Commands",
 	"description": "Run a command or set of commands multiple times.",
-	"version": "0.0.1",
+	"version": "0.0.2",
   "preview": true,
   "publisher": "ArturoDent",
   "license": "MIT",
