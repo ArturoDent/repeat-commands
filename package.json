@@ -3,49 +3,46 @@
 	"displayName": "Repeat Commands",
 	"description": "Run a command or set of commands multiple times.",
 	"version": "0.0.2",
-  "preview": true,
-  "publisher": "ArturoDent",
-  "license": "MIT",
-  "repository": {
-   "type": "git",
-   "url": "https://github.com/ArturoDent/repeat-commands"
-  },
-  "funding": {
-   "url": "https://www.buymeacoffee.com/ArturoDent"
-  },
+	"preview": true,
+	"publisher": "ArturoDent",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ArturoDent/repeat-commands"
+	},
+	"funding": {
+		"url": "https://www.buymeacoffee.com/ArturoDent"
+	},
 	"engines": {
 		"vscode": "^1.69.0"
 	},
 	"categories": [
 		"Other"
 	],
-  "keywords": [
-    "repeat",
-    "commands",
-    "multiple"
-   ],
+	"keywords": [
+		"repeat",
+		"commands",
+		"multiple"
+	],
 	"activationEvents": [
-    "onStartupFinished"
+		"onStartupFinished"
 	],
 	"main": "./out/extension.js",
-  "browser": "./out/extension.js",
-  "extensionKind": [
-    "ui",
-    "workspace"
-   ],
-  
+	"browser": "./out/extension.js",
+	"extensionKind": [
+		"ui",
+		"workspace"
+	],
 	"contributes": {
 		"commands": [
 			{
 				"command": "repeat-commands.runSequence",
 				"title": "Repeat and run commands.",
-        "category": "Repeat Commands"
+				"category": "Repeat Commands"
 			}
 		]
 	},
-  
 	"scripts": {
-		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"lint": "eslint src --ext ts",
 		"watch": "tsc -watch -p ./",
@@ -53,14 +50,15 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.56.0",
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^7.0.2",
 		"@types/node": "^13.11.0",
-		"eslint": "^6.8.0",
-		"@typescript-eslint/parser": "^2.30.0",
+		"@types/vscode": "^1.56.0",
 		"@typescript-eslint/eslint-plugin": "^2.30.0",
+		"@typescript-eslint/parser": "^2.30.0",
+		"eslint": "^6.8.0",
 		"glob": "^7.1.6",
+		"jsonc-parser": "^3.2.0",
 		"mocha": "^7.1.2",
 		"typescript": "^3.9.10",
 		"vscode-test": "^1.3.0"
